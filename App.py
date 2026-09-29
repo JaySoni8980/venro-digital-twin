@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+import os
 
 # ==========================================
 # PAGE CONFIGURATION
@@ -101,17 +102,6 @@ st.markdown("""
     .custom-form button:hover {
         background-color: #10b981;
     }
-    
-    /* 9. Poster Image Hover Effect */
-    .poster-link img {
-        transition: transform 0.2s, box-shadow 0.2s;
-        border-radius: 12px;
-        border: 1px solid #334155;
-    }
-    .poster-link img:hover {
-        transform: scale(1.01);
-        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
-    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -175,7 +165,7 @@ with header_col2:
 st.markdown("<hr style='border: none; border-top: 1px solid #1e293b; margin: 15px 0 25px 0;'>", unsafe_allow_html=True)
 
 # ==========================================
-# TABS INTERFACE (Reordered as requested)
+# TABS INTERFACE
 # ==========================================
 tab_home, tab_contact, tab_ai, tab_arch, tab_3d, tab_svd, tab_tea = st.tabs([
     "🏠 Home & Poster",
@@ -188,7 +178,7 @@ tab_home, tab_contact, tab_ai, tab_arch, tab_3d, tab_svd, tab_tea = st.tabs([
 ])
 
 # ------------------------------------------
-# TAB 1: Home & Poster
+# TAB 1: Home & Poster (FIXED POSTER IMAGE)
 # ------------------------------------------
 with tab_home:
     home_c1, home_c2 = st.columns([1, 1])
@@ -205,16 +195,15 @@ with tab_home:
         
     with home_c2:
         st.markdown("### FAMMTP 2026 Pitch Poster")
-        # Ensure your poster image file is named "poster.jpg" (or change the src below) and is placed in your GitHub repository folder.
-        st.markdown("""
-        <a href="poster.jpg" target="_blank" class="poster-link">
-            <img src="https://via.placeholder.com/800x450/0f172a/10b981?text=Click+Here+To+View+High-Res+FAMMTP+Poster" alt="FAMMTP 2026 Poster" style="width: 100%;">
-        </a>
-        <p style="text-align: center; font-size: 0.8rem; color: #94a3b8; margin-top: 8px;">Click the image to expand the full resolution poster.</p>
-        """, unsafe_allow_html=True)
+        # Streamlit Native Image Renderer (Fixes the broken HTML link)
+        if os.path.exists("poster.jpg"):
+            st.image("poster.jpg", use_container_width=True)
+            st.caption("🔍 **Hover over the image and click the expand arrows in the top right corner to view fullscreen.**")
+        else:
+            st.warning("⚠️ **Image Not Found:** Please ensure your image file is named exactly `poster.jpg` and is uploaded to your GitHub repository.")
 
 # ------------------------------------------
-# TAB 2: Contact Us (Functional Email Form)
+# TAB 2: Contact Us (FIXED HTML INDENTATION)
 # ------------------------------------------
 with tab_contact:
     st.markdown("### 📞 Partner with AVENRO")
@@ -222,27 +211,27 @@ with tab_contact:
     
     col_cform, col_cinfo = st.columns(2)
     with col_cform:
-        # REPLACE 'YOUR_EMAIL_HERE@example.com' with your actual receiving email address.
-        # The first time you submit, FormSubmit will ask you to verify your email.
-        st.markdown("""
-        <form action="https://formsubmit.co/jaysoni82007@gmail.com" method="POST" class="custom-form">
-            <!-- Disables CAPTCHA to keep the UI clean inside Streamlit -->
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_subject" value="New AVENRO Partnership Inquiry!">
-            
-            <input type="text" name="name" placeholder="Name / Title" required>
-            <input type="text" name="organization" placeholder="Company / Institution" required>
-            <input type="email" name="email" placeholder="Email Address" required>
-            <select name="category">
-                <option value="Industrial Site Testing">Industrial Site Testing</option>
-                <option value="Technical Mentorship">Technical Mentorship</option>
-                <option value="Seed / Pilot Capital">Seed / Pilot Capital</option>
-                <option value="General Inquiry">General Inquiry</option>
-            </select>
-            <textarea name="message" rows="4" placeholder="Message / Exhaust Parameters" required></textarea>
-            <button type="submit">Submit Deployment Inquiry</button>
-        </form>
-        """, unsafe_allow_html=True)
+        # The form HTML MUST start flush with the left margin. 
+        # Indenting this block with spaces causes Streamlit to render it as a code block.
+        contact_html = """
+<form action="https://formsubmit.co/jaysoni82007@gmail.com" method="POST" class="custom-form">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" value="New AVENRO Partnership Inquiry!">
+    
+    <input type="text" name="name" placeholder="Name / Title" required>
+    <input type="text" name="organization" placeholder="Company / Institution" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <select name="category">
+        <option value="Industrial Site Testing">Industrial Site Testing</option>
+        <option value="Technical Mentorship">Technical Mentorship</option>
+        <option value="Seed / Pilot Capital">Seed / Pilot Capital</option>
+        <option value="General Inquiry">General Inquiry</option>
+    </select>
+    <textarea name="message" rows="4" placeholder="Message / Exhaust Parameters" required></textarea>
+    <button type="submit">Submit Deployment Inquiry</button>
+</form>
+"""
+        st.markdown(contact_html, unsafe_allow_html=True)
 
     with col_cinfo:
         st.markdown("""
