@@ -211,6 +211,9 @@ with tab_home:
 # ------------------------------------------
 # TAB 2: Contact Us
 # ------------------------------------------
+# ------------------------------------------
+# TAB 2: Contact Us
+# ------------------------------------------
 with tab_contact:
     st.markdown("### 📞 Partner with AVENRO")
     st.markdown("We are scaling toward our **2028 industrial validation milestone (0.1 to 1,000 m³/h physical slipstream pilot)** to calibrate our SVD framework against live industrial flue gases.")
@@ -218,8 +221,8 @@ with tab_contact:
     col_cform, col_cinfo = st.columns(2)
     with col_cform:
         contact_html = """
-<!-- PASTE YOUR FORMSPREE LINK IN THE ACTION QUOTES BELOW -->
-<form action="https://formspree.io/f/PASTE_YOUR_LINK_HERE" method="POST" class="custom-form">
+<form action="https://api.web3forms.com/submit" method="POST" class="custom-form">
+<input type="hidden" name="access_key" value="632c55a1-85fa-491f-978c-bfbef29a5c71">
 <input type="text" name="name" placeholder="Name / Title" required>
 <input type="text" name="organization" placeholder="Company / Institution" required>
 <input type="email" name="email" placeholder="Email Address" required>
@@ -246,7 +249,6 @@ with tab_contact:
                 <p style="font-size: 0.85rem; margin: 6px 0;"><strong>Active Symposia:</strong> IIT Madras FAMMTP 2026</p>
             </div>
         """, unsafe_allow_html=True)
-
 # ------------------------------------------
 # TAB 3: ScrubAI Advisor
 # ------------------------------------------
