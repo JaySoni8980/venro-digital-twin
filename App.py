@@ -205,30 +205,32 @@ with tab_home:
 # ------------------------------------------
 # TAB 2: Contact Us (FIXED HTML INDENTATION)
 # ------------------------------------------
+# ------------------------------------------
+# TAB 2: Contact Us
+# ------------------------------------------
 with tab_contact:
     st.markdown("### 📞 Partner with AVENRO")
     st.markdown("We are scaling toward our **2028 industrial validation milestone (0.1 to 1,000 m³/h physical slipstream pilot)** to calibrate our SVD framework against live industrial flue gases.")
     
     col_cform, col_cinfo = st.columns(2)
     with col_cform:
-        # The form HTML MUST start flush with the left margin. 
-        # Indenting this block with spaces causes Streamlit to render it as a code block.
+        # Notice how the HTML below has ZERO spaces in front of it. 
+        # This prevents Streamlit from turning it into a code block!
         contact_html = """
 <form action="https://formsubmit.co/jaysoni82007@gmail.com" method="POST" class="custom-form">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_subject" value="New AVENRO Partnership Inquiry!">
-    
-    <input type="text" name="name" placeholder="Name / Title" required>
-    <input type="text" name="organization" placeholder="Company / Institution" required>
-    <input type="email" name="email" placeholder="Email Address" required>
-    <select name="category">
-        <option value="Industrial Site Testing">Industrial Site Testing</option>
-        <option value="Technical Mentorship">Technical Mentorship</option>
-        <option value="Seed / Pilot Capital">Seed / Pilot Capital</option>
-        <option value="General Inquiry">General Inquiry</option>
-    </select>
-    <textarea name="message" rows="4" placeholder="Message / Exhaust Parameters" required></textarea>
-    <button type="submit">Submit Deployment Inquiry</button>
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_subject" value="New AVENRO Partnership Inquiry!">
+<input type="text" name="name" placeholder="Name / Title" required>
+<input type="text" name="organization" placeholder="Company / Institution" required>
+<input type="email" name="email" placeholder="Email Address" required>
+<select name="category">
+<option value="Industrial Site Testing">Industrial Site Testing</option>
+<option value="Technical Mentorship">Technical Mentorship</option>
+<option value="Seed / Pilot Capital">Seed / Pilot Capital</option>
+<option value="General Inquiry">General Inquiry</option>
+</select>
+<textarea name="message" rows="4" placeholder="Message / Exhaust Parameters" required></textarea>
+<button type="submit">Submit Deployment Inquiry</button>
 </form>
 """
         st.markdown(contact_html, unsafe_allow_html=True)
